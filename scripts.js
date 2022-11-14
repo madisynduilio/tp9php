@@ -1,38 +1,36 @@
 //function to load a file from the URL "fromFile" into the object "whereTo"
-function loadFileInto(recipeName, listName, whereTo) {
+function loadFileInto(recipeID, listName, whereTo) {
 
   // creating a new XMLHttpRequest object
   ajax = new XMLHttpRequest();
 
-  //to define the fromFile variable with the passed recipe name and list
-  fromFile = "recipes.php?recipeName=" + recipeName + "&recipeList=" + listName;
+  //define the fromFile variable with the passed recipe name and list 
+  fromFile = "recipes.php?recipeID=" + recipeID + "&recipeList=" + listName;
+
   console.log("From URL: " + fromFile);
-  
-  // defines the GET/POST method, source, and async value of the AJAX object
+
   ajax.open("GET", fromFile, true);
 
-  // provides code to do something in response to the AJAX request
-   ajax.onreadystatechange = function() {
+  ajax.onreadystatechange = function() {
+
     if ((this.readyState == 4) && (this.status == 200)) {
 
       console.log("AJAX response: " + this.responseText);
 
       if (this.responseText != 0) {
-        //parse JSON into an array
         responseArray = JSON.parse(this.responseText);
 
-        //loop through the array to build up <li> tags for the list
         responseHTML = "";
         for (x = 0; x < responseArray.length; x++) {
           responseHTML += "<li>" + responseArray[x] + "</li>";
         }
-        //update the DOM with the response HTML
+
         document.querySelector(whereTo).innerHTML = responseHTML;
 
       } else {
-        console.log("Error: no recipe/list found");
+        console.log("Error: no recipe or list found. ");
       }
-
+      //document.querySelector(whereTo).innerHTML = this.responseText;
     } else if ((this.readyState == 4) && (this.status != 200)) {
       console.log("Error: " + this.responseText);
     }
@@ -61,7 +59,7 @@ function Recipe(recipeName, contributorName, imageURL) {
     layoutContributor = document.querySelectorAll("heroBanner h4");
     layoutContributor[0].innerHTML = "Contributed by " + this.contributor; 
     
-    document.getElementById("titleBanner").style.backgroundImage = "url(" + this.imageURL + ")";
+    document.getElementById("heroBanner").style.backgroundImage = "url(" + this.imageURL + ")";
     
     document.querySelector("#heroBanner h1").innerHTML= this.recipeName;
     document.querySelector("#contributor").innerHTML= this.contributor;

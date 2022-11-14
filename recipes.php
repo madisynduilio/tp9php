@@ -36,9 +36,6 @@ $recipes["SweetPotatoMuffins"]["directions"][] = "Spoon batter into the prepared
 $recipes["SweetPotatoMuffins"]["directions"][] = "Bake in the preheated oven for 20-25 minutes";
 $recipes["SweetPotatoMuffins"]["directions"][] = "Remove from oven and cool on wire rack.";
 
-      
-//start peach crisp
-
 
 $recipes["Salmon"] = array();
 $recipes["Salmon"]["ingredients"] = array();
@@ -99,18 +96,15 @@ $requestedList = $_GET["recipeList"];
 $requestedList = htmlspecialchars($requestedList);
 $requestedList = filter_var($requestedList, FILTER_SANITIZE_STRING);
 
-
 $requestedOutput = $recipes[$requestedID][$requestedList];
 
 $requestedJSON = "0";
 
-if ($requestedOutput != null) {
+if($requestedOutput != null){
   $requestedJSON = json_encode($requestedOutput);
 }
 
-echo $requestedJSON;
+echo $requestedJSON; 
 
-
-?>
 
 
