@@ -1,6 +1,5 @@
 <?
 
-
 $recipes = array();
 
 $recipes["SweetPotatoMuffins"] = array();
@@ -42,7 +41,7 @@ $recipes["Salmon"]["ingredients"] = array();
 $recipes["Salmon"]["equipment"] = array();
 $recipes["Salmon"]["directions"] = array();
 
-$recipes["Salmon"]["ingredients"][] = ">6 tablespoons panko bread crumbs";
+$recipes["Salmon"]["ingredients"][] = "6 tablespoons panko bread crumbs";
 $recipes["Salmon"]["ingredients"][] = "1 tablespoon grated Parmesan cheese";
 $recipes["Salmon"]["ingredients"][] = "½ teaspoon lemon pepper";
 $recipes["Salmon"]["ingredients"][] = "½ teaspoon dried thyme";
@@ -98,13 +97,15 @@ $requestedList = filter_var($requestedList, FILTER_SANITIZE_STRING);
 
 $requestedOutput = $recipes[$requestedID][$requestedList];
 
+
 $requestedJSON = "0";
 
-if($requestedOutput != null){
+if ($requestedOutput != null) {
   $requestedJSON = json_encode($requestedOutput);
 }
 
-echo $requestedJSON; 
+
+echo $requestedJSON;
 
 
 
